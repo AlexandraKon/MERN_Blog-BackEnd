@@ -28,13 +28,14 @@ app.get('/auth/me', checkAuth, UserController.getMe);
 /** Get request - */
 app.get('/posts', PostController.getAll);
 /** Get request - */
-app.get('/posts', checkAuth, postCreateValidator, PostController.create);
+app.get('/posts/:id', PostController.getOne);
+
 /** Get request - */
-//app.get('/posts/:id', PostController.getOne);
+app.post('/posts', checkAuth, postCreateValidator, PostController.create);
 /** Get request - */
-//app.delete('/posts', PostController.remove);
+app.delete('/posts/:id', checkAuth, PostController.remove);
 /** Get request - */
-//app.patch('/posts', PostController.update);
+app.patch('/posts/:id', checkAuth, PostController.update);
 
 /** Run web-server in localhost:4444*/
 app.listen(4444, (error) => {
