@@ -1,27 +1,5 @@
 import PostModel from '../models/Post.js';
 
-/** Create a post */
-export const create = async (req, res) => {
-    try {
-        const doc = new PostModel({
-            title: req.body.title,
-            text: req.body.text,
-            imageUrl: req.body.imageUrl,
-            tags: req.body.tags,
-            user: req.userId,
-        });
-
-        const post = await doc.save();
-
-        res.json(post);
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            msg: "fall create a new post",
-        });
-    };
-};
-
 /**Get All posts */
 export const getAll = async (req, res) => {
     try {
@@ -75,6 +53,43 @@ export const getOne = async (req, res) => {
     };
 };
 
+/** Get last tags*/
+export const getLastTags = async(req, res) => {
+    try {
+        const posts = await PostModel.find().limit(5).exec();
+
+        const tags = posts.map((post) => post.tags).flat().slice(0, 5);
+        res.json(tags);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            msg: "fall get all posts",
+        });
+    };
+};
+
+/** Create a post */
+export const create = async (req, res) => {
+    try {
+        const doc = new PostModel({
+            title: req.body.title,
+            text: req.body.text,
+            imageUrl: req.body.imageUrl,
+            tags: req.body.tags,
+            user: req.userId,
+        });
+
+        const post = await doc.save();
+
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            msg: "fall create a new post",
+        });
+    };
+};
+
 /** Delete one post by id*/
 export const remove = async (req, res) => {
     try {
@@ -111,7 +126,7 @@ export const remove = async (req, res) => {
     };
 };
 
-
+/**Update posts */
 export const update = async (req, res) => {
     try {
         const postId = req.params.id;

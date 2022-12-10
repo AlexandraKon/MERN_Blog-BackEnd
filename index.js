@@ -55,10 +55,15 @@ app.get('/posts', PostController.getAll);
 app.get('/posts/:id', PostController.getOne);
 
 /** Get request - */
+app.get('/tags', PostController.getLastTags);
+/** Get request - */
+app.get('/posts/tags', PostController.getLastTags);
+
+/** Post request - */
 app.post('/posts', checkAuth, postCreateValidator, handleValidationError, PostController.create);
-/** Get request - */
+/** Delete request - */
 app.delete('/posts/:id', checkAuth, PostController.remove);
-/** Get request - */
+/** Patch request - */
 app.patch('/posts/:id', checkAuth, postCreateValidator, handleValidationError, PostController.update);
 
 /** Run web-server in localhost:4444*/
