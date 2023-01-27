@@ -63,8 +63,6 @@ app.get('/posts/tags', PostController.getLastTags);
 app.post('/posts', checkAuth, postCreateValidator, handleValidationError, PostController.create);
 /** Delete request - */
 app.delete('/posts/:id', checkAuth, PostController.remove);
-/** Patch request - */
-app.patch('/posts/:id', checkAuth, postCreateValidator, handleValidationError, PostController.update);
 
 /** Run web-server in localhost:4444*/
 app.listen(4444, (error) => {

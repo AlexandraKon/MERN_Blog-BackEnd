@@ -73,7 +73,7 @@ export const login = async (req, res) => {
             },
             'secret123',
             {
-                expiresIn: '30d',
+                expiresIn: '300d',
             },
         );
 
@@ -111,7 +111,7 @@ export const getMe = async (req, res) => {
             },
             'secret123',
             {
-                expiresIn: '30d',
+                expiresIn: '300d',
             },
         );
 
